@@ -264,9 +264,7 @@
       (
          ven_battle
          ven_small2
-         #ifdef HX_NG ; meshes need to be generated differently for wii
          ven_wikker
-         #endif
          ven_z_newyork
          ven_dojo
          ven_school
