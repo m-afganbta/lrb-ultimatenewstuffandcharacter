@@ -825,5 +825,10 @@
          (genre lrb_shop_custom)
          (unlocked TRUE)
       )
+      (kizuna_head
+         (ui_name kizuna)
+         (genre lrb_shop_custom)
+         (unlocked TRUE)
+      )
    )
 )

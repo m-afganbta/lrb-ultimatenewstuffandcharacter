@@ -2100,6 +2100,17 @@
             (hair snowmiku_hair)
          )
       )
+      (kizuna
+         (unlocked TRUE)
+         (cost 1500000)
+         (genre lrb_shop_custom)
+         (outfit
+            (heads kizuna_head)
+            (torso kizuna_torso)
+            (legs kizuna_legs)
+            (hair kizuna_hair)
+         )
+      )
       #ifdef HX_NG
       (noob
          (unlocked TRUE)

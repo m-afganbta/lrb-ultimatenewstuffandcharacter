@@ -247,6 +247,7 @@
          lisa
          santabrina
          snowmiku
+         kizuna
          es
          pv
          rysz
@@ -285,6 +286,7 @@
       (miku (desdemona batman miku ivystub))
       (ghostbusters (pv es wz rysz))
       (lisa (jules nemia lisa catrin))
+      (kizuna (miku gm08 kizuna tb3))
       #ifdef HX_NG
       (festive_sabrina (snowmiku dlc_elf santabrina lisa))
       (festive_miku (santabrina dlc_snowman snowmiku dlc_riendeer))
