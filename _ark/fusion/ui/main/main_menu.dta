@@ -57,6 +57,7 @@
    (file "main_menu_artwork.milo")
    #endif
    (focus_btn quickplay.btn)
+   (can_input TRUE)
    (load)
    (enter
       {gamemode set_practice 0}
@@ -185,16 +186,32 @@
          (tour.btn
             {set $band_sel_mode 0}
             {set [focus_btn] tour.btn}
+            #ifdef HX_PS3 ; fixes a crash if this is entered before song scanning is done
+            {set [can_input] FALSE}
+            {thread_task kTaskUISeconds
+               (script
+                  {$task wait {! {content_mgr refresh_done}}}
+                  {set [can_input] TRUE}
+                  {if_else {user_mgr is_any_user_signed_in}
+                     {do
+                        {gamemode set_mode tour_local $player_num}
+                        {ui goto_screen tour_band_sel_screen}
+                        {fx fade_out}
+                     }
+                     {ui push_screen tour_band_signin_screen}
+                  }
+               )
+            }
+            #else
             {if_else {user_mgr is_any_user_signed_in}
                {do
                   {gamemode set_mode tour_local $player_num}
                   {ui goto_screen tour_band_sel_screen}
                   {fx fade_out}
                }
-               {do
-                  {ui push_screen tour_band_signin_screen}
-               }
+               {ui push_screen tour_band_signin_screen}
             }
+            #endif
          )
          (store.btn
             {do
@@ -220,7 +237,10 @@
       {if {== $action kAction_Cancel}
          {ui goto_screen main_startscreen}
       }
-      kDataUnhandled
+      {if_else [can_input]
+         kDataUnhandled
+         {eval 1}
+      }
    )
    (FOCUS_MSG DO_FOCUSCLICK kDataUnhandled)
    (TRANSITION_COMPLETE_MSG {autosave} kDataUnhandled)
