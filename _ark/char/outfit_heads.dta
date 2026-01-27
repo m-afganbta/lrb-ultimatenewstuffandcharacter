@@ -830,6 +830,11 @@
          (genre lrb_shop_custom)
          (unlocked TRUE)
       )
+      (noodle_head
+         (ui_name noodle)
+         (genre lrb_shop_custom)
+         (unlocked TRUE)
+      )
       (russel_head
          (ui_name russel)
          (genre lrb_shop_custom)

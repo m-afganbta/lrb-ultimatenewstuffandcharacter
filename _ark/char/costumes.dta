@@ -2111,6 +2111,17 @@
             (hair kizuna_hair)
          )
       )
+      (noodle
+         (unlocked TRUE)
+         (cost 2500000)
+         (genre lrb_shop_custom)
+         (outfit
+            (heads noodle_head)
+            (torso noodle_torso)
+            (legs noodle_legs)
+            (hair noodle_hair)
+         )
+      )
       (russel
          (unlocked TRUE)
          (cost 2500000)

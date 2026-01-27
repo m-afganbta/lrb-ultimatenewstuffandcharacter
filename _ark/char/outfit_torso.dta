@@ -1357,6 +1357,11 @@
          (genre lrb_shop_custom)
          (unlocked TRUE)
       )
+      (noodle_torso
+         (ui_name noodle)
+         (genre lrb_shop_custom)
+         (unlocked TRUE)
+      )
       (russel_torso
          (ui_name russel)
          (genre lrb_shop_custom)
