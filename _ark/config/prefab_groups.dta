@@ -251,6 +251,7 @@
          noodle
          russel
          2d
+         murdoc
          es
          pv
          rysz
@@ -290,6 +291,7 @@
       (ghostbusters (pv es wz rysz))
       (lisa (jules nemia lisa catrin))
       (kizuna (miku gm08 kizuna tb3))
+      (gorillaz (noodle russel 2d murdoc))
       #ifdef HX_NG
       (festive_sabrina (snowmiku dlc_elf santabrina lisa))
       (festive_miku (santabrina dlc_snowman snowmiku dlc_riendeer))

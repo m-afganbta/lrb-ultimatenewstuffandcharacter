@@ -2145,6 +2145,17 @@
             (hair 2d_hair)
          )
       )
+      (murdoc
+         (unlocked TRUE)
+         (cost 2500000)
+         (genre lrb_shop_custom)
+         (outfit
+            (heads murdoc_head)
+            (torso murdoc_torso)
+            (legs murdoc_legs)
+            (hair murdoc_hair)
+         )
+      )
       #ifdef HX_NG
       (noob
          (unlocked TRUE)

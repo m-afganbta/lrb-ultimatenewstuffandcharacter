@@ -1346,5 +1346,10 @@
          (genre lrb_shop_custom)
          (unlocked TRUE)
       )
+      (murdoc_hair
+         (ui_name murdoc)
+         (genre lrb_shop_custom)
+         (unlocked TRUE)
+      )
    )
 )

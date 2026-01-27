@@ -810,6 +810,7 @@
             )
             ("KT Tunstall" kt_tunstall)
             ("Kizuna AI" kizuna)
+            ("Gorillaz" gorillaz)
             {cond
                (
                   {||

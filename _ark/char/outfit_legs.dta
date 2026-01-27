@@ -901,5 +901,10 @@
          (genre lrb_shop_custom)
          (unlocked TRUE)
       )
+      (murdoc_legs
+         (ui_name murdoc)
+         (genre lrb_shop_custom)
+         (unlocked TRUE)
+      )
    )
 )

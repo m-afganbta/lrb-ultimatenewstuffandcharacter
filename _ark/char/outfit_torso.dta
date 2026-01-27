@@ -1372,6 +1372,11 @@
          (genre lrb_shop_custom)
          (unlocked TRUE)
       )
+      (murdoc_torso
+         (ui_name murdoc)
+         (genre lrb_shop_custom)
+         (unlocked TRUE)
+      )
       #ifdef HX_NG
       (noob
          (genre lrb_shop_custom_odd)
