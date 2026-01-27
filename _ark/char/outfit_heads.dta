@@ -830,5 +830,10 @@
          (genre lrb_shop_custom)
          (unlocked TRUE)
       )
+      (russel_head
+         (ui_name russel)
+         (genre lrb_shop_custom)
+         (unlocked TRUE)
+      )
    )
 )

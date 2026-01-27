@@ -2111,6 +2111,18 @@
             (hair kizuna_hair)
          )
       )
+      (russel
+         (unlocked TRUE)
+         (cost 2500000)
+         (genre lrb_shop_custom)
+         (outfit
+            (heads russel_head)
+            (torso russel_torso)
+            (legs russel_legs)
+            (hats no_hat)
+            (hair no_hair)
+         )
+      )
       #ifdef HX_NG
       (noob
          (unlocked TRUE)
