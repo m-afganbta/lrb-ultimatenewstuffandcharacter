@@ -1336,5 +1336,10 @@
          (genre lrb_shop_custom)
          (unlocked TRUE)
       )
+      (2d_hair
+         (ui_name 2d)
+         (genre lrb_shop_custom)
+         (unlocked TRUE)
+      )
    )
 )

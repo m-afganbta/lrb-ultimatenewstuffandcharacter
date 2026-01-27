@@ -1362,6 +1362,11 @@
          (genre lrb_shop_custom)
          (unlocked TRUE)
       )
+      (2d_torso
+         (ui_name 2d)
+         (genre lrb_shop_custom)
+         (unlocked TRUE)
+      )
       #ifdef HX_NG
       (noob
          (genre lrb_shop_custom_odd)

@@ -2123,6 +2123,17 @@
             (hair no_hair)
          )
       )
+      (2d
+         (unlocked TRUE)
+         (cost 2500000)
+         (genre lrb_shop_custom)
+         (outfit
+            (heads 2d_head)
+            (torso 2d_torso)
+            (legs 2d_legs)
+            (hair 2d_hair)
+         )
+      )
       #ifdef HX_NG
       (noob
          (unlocked TRUE)
