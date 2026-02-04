@@ -1,0 +1,46 @@
+{$this iterate BandCamShot $bcs
+   {foreach_int $i 0 {$bcs size (targets)}
+      {if {== {$bcs get (targets $i target)} player_drum}
+         {$bcs set (targets $i teleport) FALSE}
+      }
+   }
+}
+{player_drum set_local_pos 2.89 217.02 34.80}
+{big_geom set_local_pos 0 100 -6.5}
+{sparks.grp set_trans_parent big_geom}
+{curtain.mat set cull FALSE}
+{$this iterate Spotlight $l
+   {$l set_showing FALSE}
+}
+{foreach $shot
+   (  
+      "coop_v_c03.shot"
+      "coop_dir-dk.shot"
+      "coop_d_c.shot"
+      "coop_dir_v97.shot"
+      "coop_bgv_n03.shot"
+      "coop_bg_n01.shot"
+      "coop_d_n02.shot"
+      "coop_bdgv_f09.shot"
+      "coop_bgv_n02.shot"
+      "coop_bdgv_f05.shot"
+      "coop_bdgv_f13.shot"
+      "coop_d_c01.shot"
+   )
+   {$shot set enabled FALSE}
+}
+{$this iterate EventTrigger $trig
+   {do
+      ($n
+         {switch {$trig get (trigger_events 0)}
+            ((hit_p0_fret1 hit_p0_fret2) snare_drum)
+            (hit_p0_fret3 crash_hit)
+            ((hit_p0_fret4 hit_p0_fret5) kick_drum)
+            (excitement_great excitement_peak)
+         }
+      )
+      {if $n
+         {$trig set (trigger_events 0) $n}
+      }
+   }
+}
