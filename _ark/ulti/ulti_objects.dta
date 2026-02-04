@@ -427,5 +427,9 @@
          (resource_file "resource/itc_avante_garde_pro_bk.milo")
          (texts (text "itcAvantGarde.txt"))
       )
+      (dyingmarker
+         (resource_file "resource/dyingmarker.milo")
+         (texts (text "dyingmarker.txt"))
+      )
    )
 )

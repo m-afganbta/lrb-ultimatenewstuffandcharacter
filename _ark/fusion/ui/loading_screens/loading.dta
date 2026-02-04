@@ -302,13 +302,118 @@
       $token
    }
 }
+#define ENTER_CUSTOM ( ; no this can't be under finish_load, it doesn't animate right there.
+   {if {exists tip.lbl}
+      {tip.lbl set color_focus {pack_color 0.82 0.82 0.82}}
+   }
+   {if {exists flyingtape2.grp}
+      {foreach $o (flyingtape2.grp loading_word.grp)
+         {$o animate
+            (range 0 18144000)
+            (period 604800)
+            (units kTaskUISeconds)
+         }
+      }
+   }
+   {if {exists load_icon_0}
+      {tip.lbl set_type itc_avantgarde}
+      {do
+         ($first_guitar "")
+         ($first_bass "")
+         ($first_drum "")
+         ($first_vocals "")
+         {foreach_int $i 0 {user_mgr get_max_users}
+            {do
+               ($user {user_mgr get_user_from_slot $i})
+               ($track
+                  {if_else $user
+                     {$user get_track_sym}
+                     none
+                  }
+               )
+               ($object {sprintf "load_icon_%i" $i})
+               ($var {sprintf "first_%s" $track})
+               ($flip FALSE)
+               ($object_to_flip $object)
+               {cond
+                  ({== $track guitar}
+                     {if_else {== $first_guitar ""}
+                        {set $first_guitar $object}
+                        {set $flip TRUE}
+                     }
+                  )
+                  ({== $track bass}
+                     {if_else {== $first_bass ""}
+                        {set $first_bass $object}
+                        {do
+                           {set $flip TRUE}
+                           {set $object_to_flip $first_bass}
+                        }
+                     }
+                  )
+                  ({== $track drum}
+                     {if_else {== $first_drum ""}
+                        {set $first_drum $object}
+                        {set $flip TRUE}
+                     }
+                  )
+                  ({== $track vocals}
+                     {if_else {== $first_vocals ""}
+                        {set $first_vocals $object}
+                        {do
+                           {set $flip TRUE}
+                           {set $object_to_flip $first_vocals}
+                        }
+                     }
+                  )
+               }
+               {if $flip
+                  {do
+                     ($sx 1.0)
+                     ($sy 1.0)
+                     ($sz 1.0)
+                     ($anim {sprintf "%s.anim" $track})
+                     {$object_to_flip get_local_scale $sx $sy $sz}
+                     {$object_to_flip set_local_scale {'*' $sx -1.0} $sy $sz}
+                     {{$object_to_flip find $anim} animate (delay 0.4) (loop)}
+                  }
+               }
+            }
+         }
+      }
+   }
+)
+{set $loading_file "load_generic.milo"}
+#define LOAD_CUSTOM (
+   (file {do
+      {unless {== $this songs_loading_panel}
+         {set $loading_file
+            {random_elem (
+               "../../../ulti/loading_screens/rb2/loading.milo"
+               "../../../ulti/loading_screens/gh2/loading.milo"
+               "../meta_loading.milo"
+               "load_generic.milo"
+            )}
+         }
+      }
+      $loading_file
+   })
+   (get_lbl
+      {cond
+         ({exists Loading_Info.lbl} Loading_Info.lbl)
+         ({exists tip.lbl} tip.lbl)
+         (TRUE {fail "unable to find loading tip label"})
+      }
+   )
+)
 {new TexLoadPanel
    post_game_loading_panel
-   (file "../meta_loading.milo")
+   LOAD_CUSTOM
    (is_really_up FALSE)
    #include tokens.dta
    (load)
    (enter
+      ENTER_CUSTOM
       {autosave_push [next_screen]}
       {$this set is_really_up TRUE}
       {$this pick_new_hint}
@@ -323,26 +428,26 @@
    )
    (pick_new_hint
       #ifdef KIOSK_DEMO
-      {{$this find Loading_Info.lbl} set text_token {localize loading_demo}}
+      {{$this get_lbl} set text_token {localize loading_demo}}
       #else
       {if {== [is_really_up] TRUE}
          {do
             ($d {random_int 0 3})
             {switch $d
                (0
-                  {{$this find Loading_Info.lbl} set
+                  {{$this get_lbl} set
                      text_token
                      {localize {random_elem [help_tokens]}}
                   }
                )
                (1
-                  {{$this find Loading_Info.lbl} set
+                  {{$this get_lbl} set
                      text_token
                      {localize {random_elem [important_tokens]}}
                   }
                )
                (2
-                  {{$this find Loading_Info.lbl} set
+                  {{$this get_lbl} set
                      text_token
                      {localize {random_elem [lego_tokens]}}
                   }
@@ -385,7 +490,7 @@
 }
 {new TexLoadPanel
    generic_loading_panel
-   (file "load_generic.milo")
+   LOAD_CUSTOM
    (is_really_up FALSE)
    (img '')
    (hint_text)
@@ -393,11 +498,14 @@
    #include tokens.dta
    (load
       {if {!= [img] ''}
-         {$this add_tex [img] "Loading.mat"}
+         {if {exists "Loading.mat"}
+            {$this add_tex [img] "Loading.mat"}
+         }
          {$this set img ''}
       }
    )
    (enter
+      ENTER_CUSTOM
       {$this set is_really_up TRUE}
       {$this pick_new_hint}
    )
@@ -411,7 +519,7 @@
    (pick_new_hint
       #ifdef KIOSK_DEMO
       {$this set hint_text loading_demo}
-      {{$this find Loading_Info.lbl} set text_token {localize [hint_text]}}
+      {{$this get_lbl} set text_token {localize [hint_text]}}
       #else
       {do
          ($songname {meta_performer song})
@@ -441,7 +549,7 @@
                      }
                   }
                }
-               {{$this find Loading_Info.lbl} set text_token {localize [hint_text]}}
+               {{$this get_lbl} set text_token {localize [hint_text]}}
                #ifdef HX_XBOX
                {script_task kTaskUISeconds
                   (script {$this pick_new_hint})
@@ -461,22 +569,23 @@
 }
 {new TexLoadPanel
    generic_red_loading_panel
-   (file "../meta_loading.milo")
+   LOAD_CUSTOM
    (is_really_up FALSE)
    #include tokens.dta
    (load)
    (enter
+      ENTER_CUSTOM
       {$this set is_really_up TRUE}
       {$this pick_new_hint}
    )
    (exit_complete {$this set is_really_up FALSE})
    (pick_new_hint
       #ifdef KIOSK_DEMO
-      {{$this find Loading_Info.lbl} set text_token {localize loading_demo}}
+      {{$this get_lbl} set text_token {localize loading_demo}}
       #else
       {if {== [is_really_up] TRUE}
          {do
-            {{$this find Loading_Info.lbl} set
+            {{$this get_lbl} set
                text_token
                {localize {random_elem [lego_tokens]}}
             }
@@ -494,24 +603,27 @@
 }
 {new TexLoadPanel
    songs_loading_panel
-   (file "load_generic.milo")
+   LOAD_CUSTOM
    (is_really_up FALSE)
    (img '')
    #include tokens.dta
    (load
       {if {!= [img] ''}
-         {$this add_tex [img] "Loading.mat"}
+         {if {exists "Loading.mat"}
+            {$this add_tex [img] "Loading.mat"}
+         }
          {$this set img ''}
       }
    )
    (enter
+      ENTER_CUSTOM
       {do
          {if_else {== {cutscene get_current_cutscene} ''}
             {ui goto_screen {gamemode get game_screen}}
             {ui goto_screen cutscene_screen}
          }
          {$this set is_really_up TRUE}
-         {{$this find Loading_Info.lbl} set
+         {{$this get_lbl} set
             text_token
             {localize {generic_loading_panel get hint_text}}
          }
@@ -536,10 +648,10 @@
          }
          {if {== [is_really_up] TRUE}
             {if_else $phrase
-               {Loading_Info.lbl set text_token $phrase}
+               {{$this get_lbl} set text_token $phrase}
                {if_else {== {song_mgr is_download $songname} 0}
-                  {Loading_Info.lbl set text_token {get_text_token}}
-                  {Loading_Info.lbl set text_token {localize {random_elem [lego_tokens]}}}
+                  {{$this get_lbl} set text_token {get_text_token}}
+                  {{$this get_lbl} set text_token {localize {random_elem [lego_tokens]}}}
                }
             }
          }
