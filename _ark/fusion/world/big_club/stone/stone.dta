@@ -1,0 +1,119 @@
+{$this iterate BandCamShot $bcs
+   {foreach_int $i 0 {$bcs size (targets)}
+      {if {== {$bcs get (targets $i target)} player_drum}
+         {$bcs set (targets $i teleport) FALSE}
+      }
+   }
+}
+{player_drum set_local_pos -2.47 214.91 7}
+{stone_geom_RndDir set_local_pos 0 320 337}
+{amp_combo1.mesh set_trans_parent stone_geom_RndDir}
+{stone_lighting_RndDir set_trans_parent stone_geom_RndDir}
+{foreach $o
+   (
+      always_on_back.grp
+      always_on.grp
+      bonfire_stacks.grp
+      fire01.grp
+      fire10.grp
+      fire11.grp
+      fire12.grp
+      fire13.grp
+      fire14.grp
+      fire15.grp
+      fire16.grp
+      fire17.grp
+      fire2.grp
+      fire3.grp
+      fire4.grp
+      fire5.grp
+      fire6.grp
+      fire7.grp
+      fire8.grp
+      fire9.grp
+      flare_can.grp
+      lighting_front_stage_left.grp
+      lighting_front_stage_right.grp
+      lighting_low_lights.grp
+      lighting_opaque.grp
+      lightning.grp
+      'Master Cannon.grp'
+      monitors_stage.grp
+      'Stage Cannon.grp'
+      Stone_Lighting_dark.grp
+      Stone_Lighting.grp
+      stone_lighting_permanent.grp
+      Stone_Lighting_sky.grp
+      superlight.grp
+      ufo_animation.grp
+      ufo_beam01.grp
+      ufo_beam02.grp
+      ufo_beam_matanim.grp
+      ufo_effects.grp
+      ufo_energy01.grp
+      ufo_energy02.grp
+      ufo_energy_trans.grp
+      ufo_intro_envanims.grp
+      ufo_particles.grp
+      UFO_WIN.grp
+      win_beam.grp
+      win_beam_trans.grp
+      win_beam_xyz.grp
+      win_partanims.grp
+      win_particles.grp
+      win_trigger.grp
+   )
+   {$o set_trans_parent stone_lighting_RndDir}
+}
+{stone_geom_RndDir zero_all_spheres}
+{$this iterate Spotlight $l
+   {$l set_showing FALSE}
+}
+{master_top_can.mesh set_showing FALSE}
+{$this iterate Mesh $m
+   {if {startswith {$m name} "minicannon"}
+      {$m set_showing FALSE}
+   }
+}
+{foreach $shot
+   (
+      "coop_bg_n.shot"
+      "coop_dir_g29.shot"
+      "coop_v_c03.shot"
+      "coop_dir_v72.shot"
+      "coop_d_c.shot"
+      "coop_v_c01.shot"
+      "coop_dir_v52.shot"
+      "coop_dir_v97.shot"
+      "coop_bgv_n06.shot"
+      "coop_gv_n01.shot"
+      "coop_g_n01.shot"
+      "coop_dir_g32.shot"
+      "coop_dir_duo_g03.shot"
+      "coop_bgv_n04.shot"
+      "coop_g_c01.shot"
+      "coop_bgv_n01.shot"
+      "coop_dir_v07.shot"
+      "coop_dir_g12.shot"
+      "coop_dir_v32.shot"
+   )
+   {$shot set enabled FALSE}
+}
+{$this iterate EventTrigger $trig
+   {do
+      ($n
+         {switch {$trig get (trigger_events 0)}
+            ((hit_p0_fret1 hit_p0_fret2) snare_drum)
+            (hit_p0_fret3 crash_hit)
+            ((hit_p0_fret4 hit_p0_fret5) kick_drum)
+            (excitement_great excitement_peak)
+         }
+      )
+      {if $n
+         {$trig set (trigger_events 0) $n}
+      }
+   }
+}
+{hanglamp.mat set use_environ FALSE}
+{ufo.mat set use_environ FALSE}
+{stage.env insert (lights 0) Stage_a.lit}

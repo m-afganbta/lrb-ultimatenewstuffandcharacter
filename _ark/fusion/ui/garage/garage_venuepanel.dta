@@ -265,6 +265,7 @@
          ven_battle
          ven_small2
          ven_big
+         ven_stone
          ven_wikker
          ven_z_newyork
          ven_dojo
@@ -537,6 +538,7 @@
             (ven_battle small_club/battle/battle.milo)
             (ven_small2 small_club/small2/small2.milo)
             (ven_big big_club/big/big.milo)
+            (ven_stone big_club/stone/stone.milo)
             (ven_wikker big_club/wikker/wikker.milo)
             (ven_z_newyork small_club/z_newyork/z_newyork.milo)
             (ven_dojo small_club/dojo/dojo.milo)
