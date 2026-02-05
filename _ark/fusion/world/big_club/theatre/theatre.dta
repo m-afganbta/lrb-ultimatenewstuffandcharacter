@@ -1,0 +1,57 @@
+{$this iterate BandCamShot $bcs
+   {foreach_int $i 0 {$bcs size (targets)}
+      {if {== {$bcs get (targets $i target)} player_drum}
+         {$bcs set (targets $i teleport) FALSE}
+      }
+   }
+}
+{player_drum set_local_pos 2.89 217.02 25.38}
+{ALO_test4 set_local_pos 0 -390 10}
+{curtain35.1.mesh set_showing FALSE}
+{$this iterate Spotlight $l
+   {$l set_showing FALSE}
+}
+{foreach $shot
+   (
+      "coop_dir_b25.shot"
+      "coop_dir_g29.shot"
+      "coop_bdgv_n02.shot"
+      "coop_dir_v54.shot"
+      "coop_v_c03.shot"
+      "coop_dir_v72.shot"
+      "coop_dir_g10.shot"
+      "coop_dir_b05.shot"
+      "coop_dir_v97.shot"
+      "coop_d_c01.shot"
+      "coop_dir_b16.shot"
+      "coop_dir_b10.shot"
+      "coop_dir_b31.shot"
+      "coop_dir_v09.shot"
+      "coop_bg_n01.shot"
+      "coop_dir_g32.shot"
+      "coop_dir_b27.shot"
+      "coop_v_n13.shot"
+      "coop_dir_v32.shot"
+      "coop_d_c09.shot"
+   )
+   {$shot set enabled FALSE}
+}
+{CastleGardens_crowdmesh10.mesh set_local_pos -4.51 -145 -37}
+{castlegardens.crd rebuild}
+{$this iterate EventTrigger $trig
+   {do
+      ($n
+         {switch {$trig get (trigger_events 0)}
+            ((hit_p0_fret1 hit_p0_fret2) snare_drum)
+            (hit_p0_fret3 crash_hit)
+            ((hit_p0_fret4 hit_p0_fret5) kick_drum)
+         }
+      )
+      {if $n
+         {$trig set (trigger_events 0) $n}
+      }
+   }
+}
+{foreach $env (stage.env hands.env flames.env)
+   {$env insert (lights 0) Stage_a.lit}
+}
