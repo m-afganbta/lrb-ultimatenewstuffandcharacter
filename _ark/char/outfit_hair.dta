@@ -1351,5 +1351,10 @@
          (genre lrb_shop_custom)
          (unlocked TRUE)
       )
+      (chap_hair
+         (ui_name chap)
+         (genre lrb_shop_custom)
+         (unlocked TRUE)
+      )
    )
 )

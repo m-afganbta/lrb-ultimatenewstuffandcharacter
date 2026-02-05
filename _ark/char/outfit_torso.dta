@@ -1377,6 +1377,11 @@
          (genre lrb_shop_custom)
          (unlocked TRUE)
       )
+      (chap_torso
+         (ui_name chap)
+         (genre lrb_shop_custom)
+         (unlocked TRUE)
+      )
       #ifdef HX_NG
       (noob
          (genre lrb_shop_custom_odd)

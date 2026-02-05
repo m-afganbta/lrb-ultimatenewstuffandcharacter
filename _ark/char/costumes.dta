@@ -2156,6 +2156,17 @@
             (hair murdoc_hair)
          )
       )
+      (chap
+         (unlocked TRUE)
+         (cost 1250000)
+         (genre lrb_shop_custom)
+         (outfit
+            (heads chap_head)
+            (torso chap_torso)
+            (legs chap_legs)
+            (hair chap_hair)
+         )
+      )
       #ifdef HX_NG
       (noob
          (unlocked TRUE)

@@ -252,6 +252,7 @@
          russel
          2d
          murdoc
+         chap
          es
          pv
          rysz
@@ -292,6 +293,7 @@
       (lisa (jules nemia lisa catrin))
       (kizuna (miku gm08 kizuna tb3))
       (gorillaz (noodle russel 2d murdoc))
+      (chap (Quentin_Lance The_Duke_of_Gravity chap batman))
       #ifdef HX_NG
       (festive_sabrina (snowmiku dlc_elf santabrina lisa))
       (festive_miku (santabrina dlc_snowman snowmiku dlc_riendeer))

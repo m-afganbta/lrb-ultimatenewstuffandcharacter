@@ -816,6 +816,7 @@
             ("KT Tunstall" kt_tunstall)
             ("Kizuna AI" kizuna)
             ("Gorillaz" gorillaz)
+            ("Chappell Roan" chap)
             {cond
                (
                   {||
