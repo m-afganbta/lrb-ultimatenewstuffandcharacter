@@ -266,15 +266,16 @@
          ven_small2
          ven_big
          ven_theatre
+         ven_arena
          ven_stone
          ven_wikker
          ven_z_newyork
+         hob
          ven_dojo
          ven_school
          rooftop
          americanidiot
          hospital_rooftop
-         hob
       )
    )
    (rb2_venues
@@ -540,6 +541,7 @@
             (ven_small2 small_club/small2/small2.milo)
             (ven_big big_club/big/big.milo)
             (ven_theatre big_club/theatre/theatre.milo)
+            (ven_arena big_club/arena/arena.milo)
             (ven_stone big_club/stone/stone.milo)
             (ven_wikker big_club/wikker/wikker.milo)
             (ven_z_newyork small_club/z_newyork/z_newyork.milo)
