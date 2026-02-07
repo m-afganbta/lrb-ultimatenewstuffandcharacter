@@ -1,0 +1,60 @@
+{$this iterate BandCamShot $bcs
+   {foreach_int $i 0 {$bcs size (targets)}
+      {if {== {$bcs get (targets $i target)} player_drum}
+         {$bcs set (targets $i teleport) FALSE}
+      }
+   }
+}
+{player_drum set_local_pos -2.05 214.50 14.00}
+{small1_geom set_local_pos 25 115 -5.5}
+{small1_geom zero_all_spheres}
+{floor_cables.1.mesh set_showing FALSE}
+{$this iterate Spotlight $l
+   {$l set_showing FALSE}
+}
+{LightCan10 set_showing FALSE}
+{foreach $o (barrel_flame_high.grp barrel_flame_low.grp)
+   {$o set_trans_parent small1_geom}
+}
+{$this iterate ParticleSys $part
+   {unless {$part trans_parent}
+      {$part set_trans_parent small1_geom}
+   }
+}
+{foreach $shot
+   (
+      "coop_d_n.shot"
+      "coop_b_c03.shot"
+      "coop_bd_n02.shot"
+      "coop_bg_n02.shot"
+      "coop_b_c.shot"
+   )
+   {$shot set enabled FALSE}
+}
+{$this iterate EventTrigger $trig
+   {do
+      ($n
+         {switch {$trig get (trigger_events 0)}
+            ((hit_p0_fret1 hit_p0_fret2) snare_drum)
+            (hit_p0_fret3 crash_hit)
+            ((hit_p0_fret4 hit_p0_fret5) kick_drum)
+            (excitement_great excitement_peak)
+         }
+      )
+      {if $n
+         {$trig set (trigger_events 0) $n}
+      }
+   }
+}
+{foreach $env
+   (
+      stage.env
+      stage_web.env
+      unstage.env
+      walls.env
+      walls2.env
+   )
+   {$env insert (lights 0) Stage_a.lit}
+}
+{CastleGardens_crowdmesh10.mesh set_local_pos 50 -95 -40}
+{castlegardens.crd rebuild}

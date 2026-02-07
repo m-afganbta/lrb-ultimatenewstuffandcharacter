@@ -1,0 +1,91 @@
+{$this iterate BandCamShot $bcs
+   {foreach_int $i 0 {$bcs size (targets)}
+      {if {== {$bcs get (targets $i target)} player_drum}
+         {$bcs set (targets $i teleport) FALSE}
+      }
+   }
+}
+{player_drum set_local_pos 10.00 217.02 23.00}
+{arena_geom set_local_pos 0 140 331.1}
+{stage_bkg_okay.grp set_trans_parent arena_geom}
+{stage.env insert (lights 0) Stage_a.lit}
+{stage_2_lights.env insert (lights 0) Stage_a.lit}
+{$this iterate Spotlight $l
+   {$l set_showing FALSE}
+}
+{$this iterate ParticleSys $part
+   {unless {$part trans_parent}
+      {$part set_trans_parent arena_geom}
+   }
+}
+{foreach $shot
+   (
+      "coop_dir_v39.shot"
+      "coop_dir_v75.shot"
+      "coop_dir_v72.shot"
+      "coop_dir_v97.shot"
+      "coop_dir_v38.shot"
+      "coop_dir_v32.shot"
+      "coop_dir_v98.shot"
+      "coop_dir_v74.shot"
+      "coop_dir_v50.shot"
+   )
+   {$shot copy "coop_dir_v34.shot" 0}
+}
+{"coop_dir_vscream11.shot" copy "coop_dir_vscream24.shot" 0}
+{foreach $shot
+   (
+      "coop_dir_duo_g09.shot"
+      "coop_dir_duo_g03.shot"
+      "coop_dir_duo_g14.shot"
+   )
+   {$shot copy "coop_dir_duo_g02.shot" 0}
+}
+{foreach $shot
+   (  
+      "coop_dir_g29.shot"
+      "coop_dir_g20.shot"
+      "coop_dir_g09.shot"
+      "coop_dir_g24.shot"
+      "coop_dir_g14.shot"
+      "coop_dir_g32.shot"
+      "coop_dir_g46.shot"
+      "coop_dir_g12.shot"
+   )
+   {$shot copy "coop_g_n19.shot" 0}
+}
+{"coop_dir-all_grp03.shot" copy "coop_dir-all_grp07.shot" 0}
+{"coop_dir_all03.shot" copy "coop_dir_all02.shot" 0}
+{"coop_dir_b26.shot" copy "coop_dir_b02.shot" 0}
+{"coop_dir_all03.shot" copy "coop_dir_all02.shot" 0}
+{"coop_dir_brej02.shot" copy "coop_dir_brej01.shot" 0}
+{foreach $shot
+   (
+      "coop_g_n13.shot"
+      "coop_bgv_n08.shot"
+      "coop_dg_n03.shot"
+      "coop_d_c.shot"
+      "coop_g_n04.shot"
+      "coop_g_n01.shot"
+      "coop_v_n13.shot"
+   )
+   {$shot set enabled FALSE}
+}
+{$this iterate EventTrigger $trig
+   {do
+      ($n
+         {switch {$trig get (trigger_events 0)}
+            ((hit_p0_fret1 hit_p0_fret2) snare_drum)
+            (hit_p0_fret3 crash_hit)
+            ((hit_p0_fret4 hit_p0_fret5) kick_drum)
+            (excitement_great excitement_peak)
+         }
+      )
+      {if $n
+         {$trig set (trigger_events 0) $n}
+      }
+   }
+}
+#ifndef HX_NG
+{smokeplane.grp set_showing FALSE}
+#endif
