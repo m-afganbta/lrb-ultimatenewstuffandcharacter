@@ -211,6 +211,11 @@
       {if {&& {exists gems_dir} {gems_dir exists animate.trig}}
          {{gems_dir find animate.trig} trigger}
       }
+      {$this iterate TrackDir $dir
+         {$dir iterate TrackWidget $wid
+            {$wid set max_meshes {size {$wid get_array meshes}}}
+         }
+      }
       {$this update_track_speeds}
       {beatmatch foreach_active_player $player ;handle adding the appropriate callbacks to each player
          {if_else {== {$player instrument} vocals}
@@ -316,7 +321,12 @@
             {foreach $entry $a
                {if {exists {elem $entry 0}}
                   {clear_array {elem $entry 0} meshes}
-                  {{elem $entry 0} insert (meshes 0) {$gems_dir find {elem $entry 1}}}
+                  {if_else {== {type {elem $entry 1}} kDataArray}
+                     {foreach $m {elem $entry 1}
+                        {{elem $entry 0} insert (meshes 0) {$gems_dir find $m}}
+                     }
+                     {{elem $entry 0} insert (meshes 0) {$gems_dir find {elem $entry 1}}}
+                  }
                   #ifdef HX_NG
                   {{elem $entry 0} set multi_mesh
                      {if_else {== {size $entry} 3}

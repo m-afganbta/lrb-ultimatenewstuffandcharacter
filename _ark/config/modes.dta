@@ -626,6 +626,9 @@
    (enable_streak FALSE)
    (enable_star_power FALSE)
    (allow_overdrive_phrases FALSE)
+   (is_autoplay TRUE)
+   (disable_score_saving TRUE)
+   (disable_achivements TRUE)
    (game_screen jukebox_game_screen)
 )
 (camera_debug
