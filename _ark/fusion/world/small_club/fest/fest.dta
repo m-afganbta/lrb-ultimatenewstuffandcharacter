@@ -1,0 +1,54 @@
+{$this iterate BandCamShot $bcs
+   {foreach_int $i 0 {$bcs size (targets)}
+      {if {== {$bcs get (targets $i target)} player_drum}
+         {$bcs set (targets $i teleport) FALSE}
+      }
+   }
+}
+{player_drum set_local_pos -2.05 214.50 20.85}
+{LightCan10 set_showing FALSE}
+{fest_geom set_local_pos 25 210 9}
+{fest_geom zero_all_spheres}
+{dome_sky_geom.mesh set_trans_parent fest_geom}
+{dome_sky_geom.mesh set_local_scale 5 5 5}
+{foreach $o
+   (
+      statue_fire_Monster.grp
+      statue_fire_Angel.grp
+      Green_Fire.grp
+   )
+   {$o set_trans_parent fest_geom}
+}
+{$this iterate ParticleSys $part
+   {unless {$part trans_parent}
+      {$part set_trans_parent fest_geom}
+   }
+}
+{$this iterate Spotlight $l
+   {$l set_showing FALSE}
+}
+{$this iterate EventTrigger $trig
+   {do
+      ($n
+         {switch {$trig get (trigger_events 0)}
+            ((hit_p0_fret1 hit_p0_fret2) snare_drum)
+            (hit_p0_fret3 crash_hit)
+            ((hit_p0_fret4 hit_p0_fret5) kick_drum)
+            (excitement_great excitement_peak)
+         }
+      )
+      {if $n
+         {$trig set (trigger_events 0) $n}
+      }
+   }
+}
+{foreach $env
+   (
+      stage.env
+      stage_angel.env
+      stage_gargoyle.env
+   )
+   {$env insert (lights 0) Stage_a.lit}
+}
+{CastleGardens_crowdmesh10.mesh set_local_pos -4.51 -195 -100}
+{castlegardens.crd rebuild}

@@ -263,9 +263,11 @@
    (custom_venues
       (
          ven_battle
+         ven_small1
          ven_small2
          ven_big
          ven_theatre
+         ven_fest
          ven_arena
          ven_stone
          ven_wikker
@@ -538,9 +540,11 @@
             )
             ;custom
             (ven_battle small_club/battle/battle.milo)
+            (ven_small1 small_club/small1/small1.milo)
             (ven_small2 small_club/small2/small2.milo)
             (ven_big big_club/big/big.milo)
             (ven_theatre big_club/theatre/theatre.milo)
+            (ven_fest small_club/fest/fest.milo)
             (ven_arena big_club/arena/arena.milo)
             (ven_stone big_club/stone/stone.milo)
             (ven_wikker big_club/wikker/wikker.milo)
