@@ -1053,6 +1053,9 @@
          #endif
          {switch {gamemode get song_select_mode}
             (song_select_quickplay
+               {if {gamemode get randomize_venues}
+                  {quickplay_venuepanel set_random_venue}
+               }
                {input_mgr set_user ''}
                {if_else {gamemode get is_h2h_arrangement}
                   {h2h_goto_tracksel_screen}
@@ -1096,6 +1099,9 @@
                }
             )
             (song_select_jukebox
+               {if {gamemode get randomize_venues}
+                  {quickplay_venuepanel set_random_venue}
+               }
                {if_else {! {modifier_mgr is_modifier_active mod_choose_venue}}
                   {do
                      {game set_venue {random_venue}}

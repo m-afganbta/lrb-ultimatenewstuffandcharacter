@@ -421,25 +421,6 @@
    (SELECT_MSG
       {do
          ($selected {venue.lst selected_sym})
-         {if {== $selected ven_random}
-            {set $selected
-               ; i know too much
-               {eval {`
-                  {random_elem {,
-                     {random_elem
-                        (
-                           [normal_venues]
-                           [challenge_venues]
-                           [custom_venues]
-                           #ifdef _SHIP
-                           [rb2_venues]
-                           #endif
-                        )
-                     }
-                  }}
-               }}
-            }
-         }
          {if_else {!= {find_exists [challenge_map] $selected} kDataUnhandled}
             {do
                {challenge_mgr set_current_challenge $selected}
@@ -464,7 +445,14 @@
                      {$venue is_unlocked}
                   }
                   {do
-                     {$this set_venue $selected $custom}
+                     #ifndef KIOSK_DEMO
+                     {synth play button_select}
+                     #endif
+                     {gamemode set randomize_venues {== $selected ven_random}}
+                     {if_else {== $selected ven_random}
+                        {$this set_random_venue}
+                        {$this set_venue $selected}
+                     }
                      {if {&& {gamemode get is_tour_quickplay} {! $custom}}
                         {do
                            ($band {tour band})
@@ -491,15 +479,12 @@
       {$this set selection_memory {venue.lst selected_pos}}
    )
    (set_venue
-      ($venue $custom)
+      ($venue)
       {challenge_mgr clear_current_challenge}
-      #ifndef KIOSK_DEMO
-      {synth play button_select}
-      #endif
       {tour set_venue 
-         {if_else $custom
-            ven_lego_city_central
+         {if_else {find_elem [normal_venues] $venue}
             $venue
+            ven_lego_city_central
          }
       }
       {tour set_qp_venue
@@ -683,6 +668,24 @@
       }
       {ui goto_screen [quickplay_exit_screen]}
       {$this set selection_memory 0}
+   )
+   (set_random_venue
+      {$this set_venue
+         {eval {`
+            {random_elem {,
+               {random_elem
+                  (
+                     [normal_venues]
+                     [challenge_venues]
+                     [custom_venues]
+                     #ifdef _SHIP
+                     [rb2_venues]
+                     #endif
+                  )
+               }
+            }}
+         }}
+      }
    )
 }
 {new MainScreen
