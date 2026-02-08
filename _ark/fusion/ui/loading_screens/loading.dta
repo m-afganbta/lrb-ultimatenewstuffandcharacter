@@ -267,7 +267,14 @@
                   {switch $d
                      (0 {set $token {localize {random_elem [help_tokens]}}})
                      (1 {set $token {localize {random_elem [important_tokens]}}})
-                     (2 {set $token {localize {random_elem [$songname]}}})
+                     (2
+                        {set $token
+                           {if_else {$this has ($songname)}
+                              {localize tip_crash_warning}
+                              {localize {random_elem [$songname]}}
+                           }
+                        }
+                     )
                      (3 {set $token {localize {random_elem [lego_tokens]}}})
                   }
                }
@@ -293,7 +300,14 @@
             #else
             ($d {random_int 0 2})
             {switch $d
-               (0 {set $token {localize {random_elem [$songname]}}})
+               (0
+                  {set $token
+                     {if_else {$this has ($songname)}
+                        {localize tip_crash_warning}
+                        {localize {random_elem [$songname]}}
+                     }
+                  }
+               )
                (1 {set $token {localize {random_elem [lego_tokens]}}})
             }
             #endif
