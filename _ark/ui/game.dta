@@ -3,16 +3,7 @@
 {new GamePanel
    game
    (file "")
-   (held_buttons
-      (kAction_Start
-         #ifdef HX_XBOX
-         ; workaround for nova
-         0.00001
-         #else
-         0.1
-         #endif
-      )
-   )
+   (held_buttons (kAction_Start 0.00001))
    (load {set_loader_period 14})
    (unload
       {if $world
