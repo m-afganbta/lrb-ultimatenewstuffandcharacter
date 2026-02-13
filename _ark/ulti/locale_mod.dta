@@ -411,6 +411,7 @@
 (cant_create_band "Go to STORY if you want to build another band")
 (no_bands "To save mod settings you need to build a band.")
 (mod_settings_loaded "Mod settings loaded successfully!")
+(tip_crash_warning "Fun fact! The retail game would've crashed here. Please set this song as downloaded or add a loading tip.")
 (play_a_show "Play A Show")
 (moreinfo "More ...")
 (vote_obfuscate_song_by_artist_fmt "A song by %s")

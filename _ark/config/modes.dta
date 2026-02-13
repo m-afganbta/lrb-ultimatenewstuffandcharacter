@@ -164,6 +164,7 @@
    (song_select song_select_screen)
    (play_a_show FALSE)
    (is_autoplay FALSE)
+   (randomize_venues FALSE)
 )
 (init
    #ifndef HX_EE
